@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import SummaryForm from "../SummaryForm";
+import userEvent from "@testing-library/user-event";
 
 test("The button is disabled by default", () => {
   render(<SummaryForm />);
@@ -23,9 +24,9 @@ test("The checkbox's checked property is toggled when clicked", () => {
     name: "I agree to the terms and conditions",
   });
   expect(checkbox).not.toBeChecked();
-  fireEvent.click(checkbox);
+  userEvent.click(checkbox);
   expect(checkbox).toBeChecked();
-  fireEvent.click(checkbox);
+  userEvent.click(checkbox);
   expect(checkbox).not.toBeChecked();
 });
 
@@ -39,7 +40,7 @@ test("The button is enabled when the checkbox is checked, and disabled when the 
   });
   expect(button).toBeDisabled();
   expect(checkbox).not.toBeChecked();
-  fireEvent.click(checkbox);
+  userEvent.click(checkbox);
   expect(checkbox).toBeChecked();
   expect(button).toBeEnabled();
 });
