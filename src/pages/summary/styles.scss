@@ -4,5 +4,21 @@
   align-items: center;
   .checkbox-container {
     margin-bottom: 16px;
+    max-width: 375px;
+    width: 375px;
+    text-align: center;
+    .terms-and-conditions {
+      display: inline;
+      color: darkblue;
+      .terms-info {
+        color: black;
+        background-color: #add8e6;
+        padding: 16px;
+        display: inline-block;
+        max-width: fit-content;
+        line-height: 1.25;
+        margin-top: 8px;
+      }
+    }
   }
 }
