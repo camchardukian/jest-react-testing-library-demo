@@ -1,10 +1,15 @@
+import OrderEntry from "./pages/entry/OrderEntry";
 import SummaryForm from "./pages/summary/SummaryForm";
-import "./App.css";
+import { OrderDetailsProvider } from "./contexts/OrderDetails";
+import "./App.scss";
 
 const App = () => {
   return (
     <div className="App">
-      <SummaryForm />
+      <OrderDetailsProvider>
+        <OrderEntry />
+        <SummaryForm />
+      </OrderDetailsProvider>
     </div>
   );
 };
