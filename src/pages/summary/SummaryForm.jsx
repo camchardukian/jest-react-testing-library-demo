@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import OrderEntry from "../entry/OrderEntry";
 import {
   CONFIRM_ORDER,
   AGREE_TO_TERMS,
@@ -30,7 +29,6 @@ const SummaryForm = () => {
 
   return (
     <div className="summary-form">
-      <OrderEntry />
       <button onClick={handleBtnClick} disabled={isBtnDisabled}>
         {CONFIRM_ORDER}
       </button>

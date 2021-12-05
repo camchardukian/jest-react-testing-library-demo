@@ -1,6 +1,15 @@
 import { createContext, useContext, useState, useMemo } from "react";
 import { useEffect } from "react/cjs/react.development";
 import { ERROR_MESSAGE, PRICE_PER_ITEM } from "../utils/constants";
+
+function formatCurrency(amount) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }).format(amount);
+}
+
 const OrderDetails = createContext();
 
 export function useOrderDetails() {
@@ -15,10 +24,10 @@ export function useOrderDetails() {
 
 function calculateSubtotal(optionType, optionCounts) {
   let optionCount = 0;
-  for (const count of optionCount[optionType].values()) {
+  for (const count of optionCounts[optionType].values()) {
     optionCount += count;
   }
-  return optionCounts + PRICE_PER_ITEM[optionType];
+  return optionCount * PRICE_PER_ITEM[optionType];
 }
 
 export function OrderDetailsProvider(props) {
@@ -27,10 +36,12 @@ export function OrderDetailsProvider(props) {
     toppings: new Map(),
   });
 
+  const zeroCurrency = formatCurrency(0);
+
   const [totals, setTotals] = useState({
-    scoops: 0,
-    toppings: 0,
-    grandTotal: 0,
+    scoops: zeroCurrency,
+    toppings: zeroCurrency,
+    grandTotal: zeroCurrency,
   });
 
   useEffect(() => {
@@ -38,13 +49,14 @@ export function OrderDetailsProvider(props) {
     const toppingsSubtotal = calculateSubtotal("toppings", optionCounts);
     const grandTotal = scoopsSubtotal + toppingsSubtotal;
     setTotals({
-      scoops: scoopsSubtotal,
-      toppings: toppingsSubtotal,
-      grandTotal,
+      scoops: formatCurrency(scoopsSubtotal),
+      toppings: formatCurrency(toppingsSubtotal),
+      grandTotal: formatCurrency(grandTotal),
     });
   }, [optionCounts]);
+
   const value = useMemo(() => {
-    function updateItemCount(itemName, newItemCount, optionType) {
+    function updateItemCount({ itemName, newItemCount, optionType }) {
       const newOptionCounts = { ...optionCounts };
 
       // update option count for this item with the new value
