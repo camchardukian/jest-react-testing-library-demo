@@ -1,0 +1,13 @@
+.options-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  .option-container {
+    text-align: center;
+    margin: 0px 8px;
+    img {
+      max-width: 164px;
+      display: block;
+      margin-bottom: 8px;
+    }
+  }
+}

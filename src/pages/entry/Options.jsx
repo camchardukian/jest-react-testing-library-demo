@@ -5,6 +5,7 @@ import ScoopOption from "./ScoopOption";
 import ToppingOption from "./ToppingOption";
 import { useOrderDetails } from "../../contexts/OrderDetails";
 import { PRICE_PER_ITEM } from "../../utils/constants";
+import "./styles.scss";
 
 // @TODO -- Figure out why I'm getting an error about a memory leak error
 export default function Options({ optionType }) {
@@ -46,7 +47,7 @@ export default function Options({ optionType }) {
       <p>
         {title} total: {orderDetails.totals[optionType]}
       </p>
-      <div>{optionItems}</div>
+      <div className="options-list-container">{optionItems}</div>
     </>
   );
 }
