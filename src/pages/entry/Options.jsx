@@ -7,7 +7,6 @@ import { useOrderDetails } from "../../contexts/OrderDetails";
 import { PRICE_PER_ITEM } from "../../utils/constants";
 import "./styles.scss";
 
-// @TODO -- Figure out why I'm getting an error about a memory leak error
 export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(false);

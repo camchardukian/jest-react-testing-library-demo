@@ -9,19 +9,14 @@ import {
 } from "../../../utils/constants";
 
 describe("scoops subtotal", () => {
-  test("scoops subtotal default value is zero", () => {
-    render(<Options optionType="scoops" />);
-    const scoopsSubtotal = screen.getByText(SCOOPS_SUBTOTAL_LABEL, {
-      exact: false,
-    });
-    expect(scoopsSubtotal).toHaveTextContent("0.00");
-  });
-
   test("update scoops subtotal when quantity or type of scoops change", async () => {
     render(<Options optionType="scoops" />);
     const scoopsSubtotal = screen.getByText(SCOOPS_SUBTOTAL_LABEL, {
       exact: false,
     });
+
+    // Ensures scoops subtotal starts at "0.00"
+    expect(scoopsSubtotal).toHaveTextContent("0.00");
 
     // update number of vanilla scoops to 1 and check the scoopsSubtotal
     const vanillaInput = await screen.findByRole("spinbutton", {
@@ -43,19 +38,14 @@ describe("scoops subtotal", () => {
 });
 
 describe("toppings subtotal", () => {
-  test("toppings subtotal default value is zero", () => {
-    render(<Options optionType="toppings" />);
-    const toppingsSubtotal = screen.getByText(TOPPINGS_SUBTOTAL_LABEL, {
-      exact: false,
-    });
-    expect(toppingsSubtotal).toHaveTextContent("0.00");
-  });
-
   test("update toppings subtotal when the number of toppings changes", async () => {
     render(<Options optionType="toppings" />);
     const toppingsSubtotal = screen.getByText(TOPPINGS_SUBTOTAL_LABEL, {
       exact: false,
     });
+
+    // Ensures toppings subtotal starts at "0.00"
+    expect(toppingsSubtotal).toHaveTextContent("0.00");
 
     // check the "Cherries" topping and ensure the subtotal is correct.
     const cherriesInput = await screen.findByRole("checkbox", {
@@ -83,14 +73,6 @@ describe("toppings subtotal", () => {
 });
 
 describe("grand total", () => {
-  test("grand total starts at $0:00", () => {
-    render(<OrderEntry />);
-    const grandTotal = screen.getByRole("heading", {
-      name: /grand total: \$/i,
-    });
-    expect(grandTotal).toHaveTextContent("$0.00");
-  });
-
   test("grand total is updated properly if scoop is added first", async () => {
     render(<OrderEntry />);
     const grandTotal = screen.getByRole("heading", {
@@ -99,6 +81,9 @@ describe("grand total", () => {
     const vanillaInput = await screen.findByRole("spinbutton", {
       name: "Vanilla",
     });
+
+    // Ensures grandTotal starts at "$0.00"
+    expect(grandTotal).toHaveTextContent("$0.00");
 
     userEvent.clear(vanillaInput);
     userEvent.type(vanillaInput, "1");
