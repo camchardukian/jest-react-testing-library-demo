@@ -9,5 +9,14 @@
       display: block;
       margin-bottom: 8px;
     }
+    .topping-input-container {
+      display: flex;
+      justify-content: center;
+    }
+    .scoop-input-container {
+      input {
+        margin-left: 8px;
+      }
+    }
   }
 }
