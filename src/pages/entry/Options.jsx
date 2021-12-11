@@ -5,6 +5,7 @@ import ScoopOption from "./ScoopOption";
 import ToppingOption from "./ToppingOption";
 import { useOrderDetails } from "../../contexts/OrderDetails";
 import { PRICE_PER_ITEM } from "../../utils/constants";
+import Helpers from "../../utils/helpers";
 import "./styles.scss";
 
 export default function Options({ optionType }) {
@@ -42,7 +43,7 @@ export default function Options({ optionType }) {
   return (
     <>
       <h2>{title}</h2>
-      <p>for {PRICE_PER_ITEM[optionType]} each</p>
+      <p>for {Helpers.formatCurrency(PRICE_PER_ITEM[optionType])} each</p>
       <p>
         {title} total: {orderDetails.totals[optionType]}
       </p>

@@ -7,14 +7,16 @@ export default function ToppingOption({ name, imagePath, updateItemCount }) {
   return (
     <div className="option-container">
       <img src={`http://localhost:3030/${imagePath}`} alt={`${name} topping`} />
-      <label htmlFor={`${name}Topping`}>{name}</label>
-      <input
-        name={name}
-        onClick={handleToggleCheck}
-        type="checkbox"
-        id={`${name}Topping`}
-        aria-label={name}
-      />
+      <div className="topping-input-container">
+        <label htmlFor={`${name}Topping`}>{name}</label>
+        <input
+          name={name}
+          onClick={handleToggleCheck}
+          type="checkbox"
+          id={`${name}Topping`}
+          aria-label={name}
+        />
+      </div>
     </div>
   );
 }

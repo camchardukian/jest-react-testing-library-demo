@@ -1,14 +1,7 @@
 import { createContext, useContext, useState, useMemo } from "react";
 import { useEffect } from "react/cjs/react.development";
 import { ERROR_MESSAGE, PRICE_PER_ITEM } from "../utils/constants";
-
-function formatCurrency(amount) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-  }).format(amount);
-}
+import Helpers from "../utils/helpers";
 
 const OrderDetails = createContext();
 
@@ -36,7 +29,7 @@ export function OrderDetailsProvider(props) {
     toppings: new Map(),
   });
 
-  const zeroCurrency = formatCurrency(0);
+  const zeroCurrency = Helpers.formatCurrency(0);
 
   const [totals, setTotals] = useState({
     scoops: zeroCurrency,
@@ -49,9 +42,9 @@ export function OrderDetailsProvider(props) {
     const toppingsSubtotal = calculateSubtotal("toppings", optionCounts);
     const grandTotal = scoopsSubtotal + toppingsSubtotal;
     setTotals({
-      scoops: formatCurrency(scoopsSubtotal),
-      toppings: formatCurrency(toppingsSubtotal),
-      grandTotal: formatCurrency(grandTotal),
+      scoops: Helpers.formatCurrency(scoopsSubtotal),
+      toppings: Helpers.formatCurrency(toppingsSubtotal),
+      grandTotal: Helpers.formatCurrency(grandTotal),
     });
   }, [optionCounts]);
 
