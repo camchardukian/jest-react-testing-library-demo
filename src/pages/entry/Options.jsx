@@ -12,7 +12,6 @@ export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(false);
   const [orderDetails, updateItemCount] = useOrderDetails();
-
   // optionType is 'scoops' or 'toppings'
   useEffect(() => {
     axios

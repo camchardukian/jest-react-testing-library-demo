@@ -7,7 +7,8 @@ import {
 } from "../../utils/constants";
 import "./styles.scss";
 
-const SummaryForm = () => {
+const SummaryForm = (props) => {
+  const { onSetOrderPhase } = props;
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
 
@@ -17,7 +18,9 @@ const SummaryForm = () => {
     });
   };
 
-  const handleBtnClick = () => {};
+  const handleConfirmOrder = () => {
+    onSetOrderPhase(2);
+  };
 
   const handleOnMouseEnter = () => {
     setIsTermsOpen(true);
@@ -29,7 +32,7 @@ const SummaryForm = () => {
 
   return (
     <div className="summary-form">
-      <button onClick={handleBtnClick} disabled={isBtnDisabled}>
+      <button onClick={handleConfirmOrder} disabled={isBtnDisabled}>
         {CONFIRM_ORDER}
       </button>
       <div className="checkbox-container">
