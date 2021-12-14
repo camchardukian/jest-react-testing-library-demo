@@ -10,7 +10,7 @@ const App = () => {
     setOrderPhase(phaseNumber);
   };
   return (
-    <div className="App">
+    <div className="app">
       <OrderDetailsProvider>
         {orderPhase === 0 && (
           <OrderEntry onSetOrderPhase={handleSetOrderPhase} />
