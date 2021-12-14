@@ -1,4 +1,9 @@
-button {
-  padding: 8px 16px;
-  font-size: 24px;
+body {
+  background-color: lightpink;
+  .app {
+    button {
+      padding: 8px 16px;
+      font-size: 24px;
+    }
+  }
 }

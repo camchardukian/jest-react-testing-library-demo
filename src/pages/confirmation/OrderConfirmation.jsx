@@ -1,5 +1,6 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { useOrderDetails } from "../../contexts/OrderDetails";
 import AlertBanner from "../common/AlertBanner";
 import "./styles.scss";
 
@@ -7,6 +8,7 @@ const OrderConfirmation = (props) => {
   const { onSetOrderPhase } = props;
   const [orderNumber, setOrderNumber] = useState(null);
   const [error, setError] = useState(false);
+  const [, , resetOrder] = useOrderDetails();
 
   useEffect(() => {
     axios
@@ -14,10 +16,16 @@ const OrderConfirmation = (props) => {
       .then((response) => setOrderNumber(response.data.orderNumber))
       .catch((error) => setError(true));
   }, []);
-  console.log("errror", error);
+
   if (error) {
     return <AlertBanner />;
   }
+
+  const handleResetOrder = () => {
+    resetOrder();
+    onSetOrderPhase(0);
+  };
+
   return (
     <div className="order-confirmation-page">
       {orderNumber ? (
@@ -25,7 +33,7 @@ const OrderConfirmation = (props) => {
           <h1>Thank you</h1>
           <h2>Your order number is: {orderNumber}</h2>
           <h4>As per our terms and conditions nothing will happen now</h4>
-          <button onClick={() => onSetOrderPhase(0)}>Create new order</button>
+          <button onClick={handleResetOrder}>Create new order</button>
         </>
       ) : (
         <div>Loading...</div>

@@ -12,7 +12,7 @@ const OrderSummary = (props) => {
         <ul className="details-list">
           {[...orderDetails.scoops.entries()].map((scoop) => {
             return (
-              <li>
+              <li key={scoop[0]}>
                 {`${scoop[1]} `}
                 {scoop[0]}
               </li>
@@ -24,7 +24,7 @@ const OrderSummary = (props) => {
       {orderDetails.toppings.size > 0 && (
         <ul className="details-list">
           {[...orderDetails.toppings.entries()].map((topping) => {
-            return <li>{topping[0]}</li>;
+            return <li key={topping[0]}>{topping[0]}</li>;
           })}
         </ul>
       )}

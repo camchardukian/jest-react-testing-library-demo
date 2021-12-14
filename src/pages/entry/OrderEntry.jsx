@@ -4,6 +4,7 @@ import { useOrderDetails } from "../../contexts/OrderDetails";
 export default function OrderEntry(props) {
   const [orderDetails] = useOrderDetails();
   const { onSetOrderPhase } = props;
+
   return (
     <div className="order-entry-page">
       <Options optionType="scoops" />
