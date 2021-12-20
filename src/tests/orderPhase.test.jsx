@@ -55,6 +55,10 @@ test("order phases for happy path", async () => {
   });
   userEvent.click(confirmOrderBtn);
 
+  // confirm "loading..." text appears until server returns order number.
+  const loadingText = screen.getByText("Loading...");
+  expect(loadingText).toBeInTheDocument();
+
   // confirm order number on confirmation page
   const orderNumberHeading = await screen.findByRole("heading", {
     name: /^Your order number is:/,
@@ -62,6 +66,10 @@ test("order phases for happy path", async () => {
   expect(orderNumberHeading).toHaveTextContent(
     "Your order number is: 32423423443"
   );
+
+  // confirm "loading..." text has disappeared after the server's response has been received.
+  expect(loadingText).not.toBeInTheDocument();
+
   // click "new order" button on confirmation page
   const newOrderBtn = screen.getByRole("button", {
     name: "Create new order",
