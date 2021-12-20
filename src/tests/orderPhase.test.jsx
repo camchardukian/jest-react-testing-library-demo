@@ -88,3 +88,30 @@ test("order phases for happy path", async () => {
   const toppingsSubtotal = screen.queryByText("Toppings total: $0.00");
   expect(toppingsSubtotal).toBeInTheDocument();
 });
+
+test("Toppings header is not displayed if no toppings were ordered", async () => {
+  // render app
+  render(<App />);
+  // add scoops and toppings
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+  userEvent.clear(vanillaInput);
+  userEvent.type(vanillaInput, "2");
+
+  // find and click order button
+  const orderButton = screen.getByRole("button", {
+    name: "Order Sundae!",
+  });
+  userEvent.click(orderButton);
+  // check summary information based on order
+  const scoopsPrice = screen.queryByText("Scoops: $4.00");
+  expect(scoopsPrice).toBeInTheDocument();
+  const vanillaScoops = screen.queryByText("2 Vanilla");
+  expect(vanillaScoops).toBeInTheDocument();
+
+  const toppingsHeading = screen.queryByRole("heading", {
+    name: /toppings/i,
+  });
+  expect(toppingsHeading).not.toBeInTheDocument();
+});

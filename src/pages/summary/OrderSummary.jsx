@@ -20,13 +20,15 @@ const OrderSummary = (props) => {
           })}
         </ul>
       )}
-      <h2>Toppings: {orderDetails.totals.toppings}</h2>
       {orderDetails.toppings.size > 0 && (
-        <ul className="details-list">
-          {[...orderDetails.toppings.entries()].map((topping) => {
-            return <li key={topping[0]}>{topping[0]}</li>;
-          })}
-        </ul>
+        <>
+          <h2>Toppings: {orderDetails.totals.toppings}</h2>
+          <ul className="details-list">
+            {[...orderDetails.toppings.entries()].map((topping) => {
+              return <li key={topping[0]}>{topping[0]}</li>;
+            })}
+          </ul>
+        </>
       )}
       <SummaryForm onSetOrderPhase={onSetOrderPhase} />
     </div>
