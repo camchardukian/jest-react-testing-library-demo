@@ -9,10 +9,11 @@ export default function ScoopOption({ name, imagePath, updateItemCount }) {
     updateItemCount({ itemName: name, newItemCount: value });
   };
   const scoopCountAsInteger = Number(itemCount);
-  const isValidScoopNumber =
-    Number.isInteger(scoopCountAsInteger) &&
-    scoopCountAsInteger >= 0 &&
-    scoopCountAsInteger <= 10;
+  const isInvalidScoopNumber =
+    itemCount === "" ||
+    !Number.isInteger(scoopCountAsInteger) ||
+    scoopCountAsInteger < 0 ||
+    scoopCountAsInteger > 10;
   return (
     <>
       <div className="option-container">
@@ -23,13 +24,13 @@ export default function ScoopOption({ name, imagePath, updateItemCount }) {
             role="spinbutton"
             type="number"
             aria-label={name}
-            aria-invalid={!isValidScoopNumber}
+            aria-invalid={isInvalidScoopNumber}
             min="0"
             max="10"
             value={itemCount}
             id={`${name}Scoop`}
             onChange={handleChange}
-            className={isValidScoopNumber ? "" : "input-error"}
+            className={isInvalidScoopNumber ? "input-error" : ""}
           ></input>
         </div>
       </div>
