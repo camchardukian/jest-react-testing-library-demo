@@ -58,11 +58,23 @@ export function OrderDetailsProvider(props) {
   const value = useMemo(() => {
     function updateItemCount({ itemName, newItemCount, optionType }) {
       const newOptionCounts = { ...optionCounts };
+      //
+      if (newItemCount === "") {
+        return;
+      }
+      const newItemCountAsInteger = Number(newItemCount);
+
+      const isValidCountNumber =
+        Number.isInteger(newItemCountAsInteger) &&
+        newItemCountAsInteger >= 0 &&
+        newItemCountAsInteger <= 10;
 
       // update option count for this item with the new value
-      const optionCountsMap = optionCounts[optionType];
-      optionCountsMap.set(itemName, parseInt(newItemCount));
-      setOptionCounts(newOptionCounts);
+      if (isValidCountNumber) {
+        const optionCountsMap = optionCounts[optionType];
+        optionCountsMap.set(itemName, parseInt(newItemCount));
+        setOptionCounts(newOptionCounts);
+      }
     }
     // getter: object containing option counts for scoops and toppings, subtotals and totals
     // setter: updateOptionCount
